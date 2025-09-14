@@ -8,11 +8,23 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  overflow: hidden;
+  background-attachment: fixed;
 }
 
 .container {
   margin-top: 50px;
+}
+
+ul {
+  width: 60%;
+  margin: auto;
+  /* background-color: red; */
+  list-style: none;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(16, auto);
+  grid-auto-columns: 300px;
+  column-gap: 50px;
 }
 
 .container li {
