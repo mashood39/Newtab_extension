@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "custom new tab",
+  "version": "1.0",
+  "description": "A new tab page which can be completely customizible",
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "permissions": [
+    "bookmarks"
+  ]
+}

@@ -1,0 +1,31 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background-image: url("https://i.pinimg.com/1200x/9f/86/f1/9f86f195892b6f3b797f8a7ad13ffff6.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow: hidden;
+}
+
+.container {
+  margin-top: 50px;
+}
+
+.container li {
+  font-size: 16px;
+  padding: 0 0 10px 0;
+}
+
+li a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  color: aquamarine;
+}
