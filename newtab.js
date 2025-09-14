@@ -10,7 +10,11 @@ function loadBookmarks() {
           const li = document.createElement('li');
           const a = document.createElement('a');
           a.href = node.url;
-          a.textContent = node.title || node.url;
+          let text = node.title || node.url;
+          if(text.length > 30) {
+            text = text.substring(0,30) + "...";
+          }
+          a.textContent = text;
           a.target = "_blank"
           li.appendChild(a);
           list.appendChild(li);
