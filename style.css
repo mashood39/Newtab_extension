@@ -29,6 +29,7 @@ ul {
 .container li {
   font-size: 16px;
   padding: 0 0 10px 0;
+  font-weight: 400;
 }
 
 li a {
