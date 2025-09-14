@@ -16,7 +16,7 @@ body {
 }
 
 ul {
-  width: 60%;
+  width: 50%;
   margin: auto;
   list-style: none;
   display: grid;
@@ -24,6 +24,7 @@ ul {
   grid-template-rows: repeat(16, auto);
   grid-auto-columns: 300px;
   column-gap: 50px;
+  padding: 0;
 }
 
 .container li {
