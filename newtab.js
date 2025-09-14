@@ -4,7 +4,6 @@ function loadBookmarks() {
   list.innerHTML = ""
 
   chrome.bookmarks.getTree((nodes) => {
-    console.log(nodes)
     function traverse(bookmarkNodes) {
       for (let node of bookmarkNodes) {
         if(node.url) {

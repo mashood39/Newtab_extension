@@ -18,7 +18,6 @@ body {
 ul {
   width: 60%;
   margin: auto;
-  /* background-color: red; */
   list-style: none;
   display: grid;
   grid-auto-flow: column;
