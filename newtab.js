@@ -11,7 +11,6 @@ function loadBookmarks() {
           const a = document.createElement('a');
           a.href = node.url;
           const img = document.createElement('img')
-          // img.src = "https://www.google.com/s2/favicons?sz=32&domain_url=" + node.url;
           img.src = `/_favicon/?pageUrl=${encodeURIComponent(node.url)}$size=16`;
           img.srcset = `/_favicon/?pageUrl=${encodeURIComponent(node.url)}&size=32 2x`
           img.alt = " "
