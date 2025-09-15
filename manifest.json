@@ -8,6 +8,19 @@
   },
   "permissions": [
     "bookmarks",
-    "favicon"
-  ]
+    "favicon",
+    "tabs"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "commands": {
+    "focus-search": {
+      "suggested_key": {
+        "default": "Ctrl+M",
+        "mac": "Command+M"
+      },
+      "description": "Open the search bar."
+    }
+  }
 }
