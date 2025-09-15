@@ -12,7 +12,7 @@ body {
 }
 
 .container {
-  margin-top: 100px;
+  margin-top: 60px;
 }
 
 ul {
@@ -29,24 +29,24 @@ ul {
 
 .container li {
   font-size: 16px;
-  padding: 0 0 12px 0;
+  padding: 0 0 16px 0;
   font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-li img {
-  width: 20px;
-  height: 20px;
-  border-radius: 2px;
 }
 
 li a {
   text-decoration: none;
   color: white;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 a:hover {
-  color: aquamarine;
+  color: rgb(30, 0, 255);
+}
+
+li a img {
+  width: 24px;
+  height: 24px;
+  border-radius: 2px;
 }
