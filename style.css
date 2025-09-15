@@ -31,6 +31,15 @@ ul {
   font-size: 16px;
   padding: 0 0 12px 0;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+li img {
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
 }
 
 li a {
