@@ -13,8 +13,8 @@ function loadBookmarks() {
           const a = document.createElement('a');
           a.href = node.url;
           let text = node.title || node.url;
-          if (text.length > 30) {
-            text = text.substring(0, 30) + "...";
+          if (text.length > 25) {
+            text = text.substring(0, 25) + "...";
           }
 
           a.appendChild(img);
