@@ -15,7 +15,6 @@ function loadBookmarks() {
             text = text.substring(0,30) + "...";
           }
           a.textContent = text;
-          a.target = "_blank"
           li.appendChild(a);
           list.appendChild(li);
         }
