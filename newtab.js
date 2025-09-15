@@ -11,8 +11,8 @@ function loadBookmarks() {
           const a = document.createElement('a');
           a.href = node.url;
           const img = document.createElement('img')
-          img.src = `/_favicon/?pageUrl=${encodeURIComponent(node.url)}$size=16`;
-          img.srcset = `/_favicon/?pageUrl=${encodeURIComponent(node.url)}&size=32 2x`
+          img.src = `chrome-extension://${chrome.runtime.id}/_favicon/?pageUrl=${encodeURIComponent(node.url)}&size=16`;
+          img.srcset = `chrome-extension://${chrome.runtime.id}/_favicon/?pageUrl=${encodeURIComponent(node.url)}&size=32 2x`
           img.alt = " "
 
           let text = node.title || node.url;
