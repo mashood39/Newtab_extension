@@ -26,8 +26,6 @@ body {
 }
 
 ul {
-  width: 50%;
-  margin: auto;
   list-style: none;
   display: grid;
   grid-auto-flow: column;
@@ -35,6 +33,7 @@ ul {
   grid-auto-columns: 300px;
   column-gap: 50px;
   padding: 0;
+  justify-content: center;
 }
 
 .container li {
