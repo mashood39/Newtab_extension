@@ -1,61 +1,124 @@
-let allBookmarks = [];
-
-// Load bookmarks
+// Load bookmarks with folder structure
 function loadBookmarks() {
   const list = document.getElementById('bookmarkList');
   list.innerHTML = ""
-  allBookmarks = [];
 
   chrome.bookmarks.getTree((nodes) => {
-    function traverse(bookmarkNodes) {
-      for (let node of bookmarkNodes) {
-        if (node.url) {
-          allBookmarks.push(node);
-        }
-        if (node.children) {
-          traverse(node.children)
-        }
-      }
-    }
-    traverse(nodes)
-    displayBookmarks(allBookmarks);
+    console.log(nodes)
+    displayBookmarksTree(nodes[0].children, list);
   })
 }
 
-function displayBookmarks(bookmarksToDisplay) {
-  const list = document.getElementById('bookmarkList');
-  list.innerHTML = "";
+function displayBookmarksTree(nodes, list) {
+  for (let node of nodes) {
+    if (node.children) {
+      const li = document.createElement('li');
 
-  for (let node of bookmarksToDisplay) {
-    const li = document.createElement('li');
-    const a = document.createElement('a');
-    a.href = node.url;
-    const img = document.createElement('img')
-    img.src = `chrome-extension://${chrome.runtime.id}/_favicon/?pageUrl=${encodeURIComponent(node.url)}&size=16`;
-    img.srcset = `chrome-extension://${chrome.runtime.id}/_favicon/?pageUrl=${encodeURIComponent(node.url)}&size=32 2x`
-    img.alt = " "
+      const folderHeader = document.createElement('div');
+      folderHeader.className = "folder-header";
 
-    let text = node.title || node.url;
-    if (text.length > 25) {
-      text = text.substring(0, 25) + "...";
+      const toggleIcon = document.createElement('span');
+      toggleIcon.textContent = "▼";
+      toggleIcon.className = "toggle-icon";
+
+      const folderTitle = document.createElement('span');
+      folderTitle.textContent = node.title;
+      folderTitle.className = "folder-title";
+
+      folderHeader.appendChild(toggleIcon);
+      folderHeader.appendChild(folderTitle);
+      li.appendChild(folderHeader);
+
+      const folderDiv = document.createElement('div');
+      folderDiv.className = "folder-content";
+
+      const ul = document.createElement('ul');
+
+      folderDiv.appendChild(ul)
+      li.appendChild(folderDiv);
+      list.appendChild(li);
+
+      //event: toggle folder
+      folderHeader.addEventListener("click", () => {
+        const isHidden = folderDiv.classList.toggle("hidden");
+        toggleIcon.textContent = isHidden ? "▶" : "▼";
+      })
+
+      displayBookmarksTree(node.children, ul);
+
+    } else if (node.url) {
+      list.appendChild(createBookmarkItem(node))
     }
-
-    a.appendChild(img);
-    a.appendChild(document.createTextNode(text));
-    li.appendChild(a);
-    list.appendChild(li);
   }
+}
+
+function createBookmarkItem(node) {
+  const li = document.createElement('li');
+  const a = document.createElement('a');
+  a.href = node.url;
+
+  const img = document.createElement('img')
+  img.src = `chrome-extension://${chrome.runtime.id}/_favicon/?pageUrl=${encodeURIComponent(node.url)}&size=16`;
+  img.srcset = `chrome-extension://${chrome.runtime.id}/_favicon/?pageUrl=${encodeURIComponent(node.url)}&size=32 2x`
+  img.alt = " "
+
+  let text = node.title || node.url;
+  if (text.length > 25) {
+    text = text.substring(0, 25) + "...";
+  }
+
+  a.appendChild(img);
+  a.appendChild(document.createTextNode(text));
+  li.appendChild(a);
+
+  return li;
 }
 
 // to filter bookmarks based on search input
 function filterBookmarks() {
   const searchInput = document.getElementById('searchBar').value.toLowerCase();
-  const filtered = allBookmarks.filter(bookmark => {
-    const title = (bookmark.title || "").toLowerCase();
-    const url = (bookmark.url || "").toLowerCase();
-    return title.includes(searchInput) || url.includes(searchInput)
+  const list = document.getElementById('bookmarkList');
+  list.innerHTML = "";
+
+  if (!searchInput) {
+    loadBookmarks();
+    return;
+  }
+
+  chrome.bookmarks.getTree((nodes) => {
+    function filterTree(nodes) {
+      const results = [];
+
+      for (let node of nodes) {
+        if (node.url) {
+          const title = (node.title || "").toLowerCase();
+          const url = (node.url || "").toLowerCase();
+          if (title.includes(searchInput) || url.includes(searchInput)) {
+            results.push(node)
+          }
+        }
+        else if (node.children) {
+          const folderName = (node.title || "").toLowerCase();
+
+          if (folderName.includes(searchInput)) {
+            results.push(node)
+          } else {
+            const filteredChildren = filterTree(node.children);
+            if (filteredChildren.length > 0) {
+              results.push({
+                ...node,
+                children: filteredChildren
+              })
+            }
+          }
+        }
+      }
+      return results;
+    }
+
+    const filteredTree = filterTree(nodes);
+    displayBookmarksTree(filteredTree, list);
   })
-  displayBookmarks(filtered);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
