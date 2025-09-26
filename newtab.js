@@ -24,9 +24,6 @@ function displayBookmarksTree(nodes, list) {
       const folderTitle = document.createElement('span');
       folderTitle.textContent = node.title;
       folderTitle.className = "folder-title";
-      folderTitle.style.fontWeight = "bold";
-      folderTitle.style.display = "block";
-      folderTitle.style.color = "white";
 
       folderHeader.appendChild(toggleIcon);
       folderHeader.appendChild(folderTitle);

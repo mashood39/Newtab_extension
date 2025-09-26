@@ -1,6 +1,6 @@
-html,
-body {
+* {
   margin: 0;
+  padding: 0;
 }
 
 body {
@@ -11,19 +11,26 @@ body {
   background-attachment: fixed;
 }
 
-.container {
-  /* margin-top: 40px; */
-}
-
 .search-bar {
   width: 30%;
   margin: 20px auto;
-  background-color: red;
 }
 
 #searchBar {
   width: 100%;
-  outline: none;
+}
+
+#bookmarkList {
+  /* display: grid;
+  grid-auto-flow: column;
+  grid-auto-rows: minmax(50px, auto);
+  grid-template-rows: repeat(10, auto);
+  grid-auto-columns: 300px;
+  column-gap: 50px;
+  justify-content: center;
+  max-height: 400px; */
+  column-width: 200px;
+  height: 400px;
 }
 
 .folder-header {
@@ -35,6 +42,8 @@ body {
   background-color: rgb(100, 101, 102);
   padding: 5px 5px 5px 15px;
   border-radius: 5px;
+  font-weight: bold;
+  color: white;
 }
 
 .toggle-icon {
@@ -42,29 +51,17 @@ body {
   color: white;
 }
 
+.folder-content {
+  margin-left: 35px;
+}
+
 .hidden {
   display: none;
 }
 
-.folder-content {
-  margin-left: 70px;
-  transition: max-height 0.3s ease;
-  max-height: 500px;
-}
-
-.folder-content.hidden {
-  max-height: 0;
-}
-
 ul {
   list-style: none;
-  display: grid;
-  grid-auto-flow: column;
-  grid-template-rows: repeat(16, auto);
-  grid-auto-columns: 300px;
-  column-gap: 50px;
-  padding: 0;
-  justify-content: center;
+  /* padding: 0; */
 }
 
 .container li {
