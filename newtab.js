@@ -73,5 +73,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (request.action === "focusSearch") {
       searchBar.focus();
     }
+    if (request.action === "toggleShowAll") {
+      showAllToggle.checked = !showAllToggle.checked;
+      applyFilters();
+    }
   })
 })

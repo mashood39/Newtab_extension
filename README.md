@@ -7,7 +7,7 @@ A Chrome extension that replaces the New Tab page with a searchable bookmark das
 - Displays all your bookmarks with favicons in a responsive, centered column layout
 - Live search/filter by bookmark title or URL
 - Keyboard shortcut (`Ctrl+M` / `Cmd+M`) to jump focus to the search bar
-- Bookmarks inside a "Personal" folder are hidden by default; check **Show all** (top-right) to reveal them
+- Bookmarks inside a "Personal" folder are hidden by default; check **Show all** (top-right) to reveal them, or toggle it with `Ctrl+Shift+M` / `Cmd+Shift+M`
 
 ## Installation
 

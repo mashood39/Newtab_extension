@@ -27,6 +27,13 @@
         "mac": "Command+M"
       },
       "description": "Open the search bar."
+    },
+    "toggle-show-all": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+M",
+        "mac": "Command+Shift+M"
+      },
+      "description": "Toggle showing all bookmarks."
     }
   }
 }
