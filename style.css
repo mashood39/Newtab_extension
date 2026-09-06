@@ -1,5 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+
 html, body {
   margin: 0;
+  height: 100%;
+  overflow: hidden;
 }
 
 body {
@@ -11,35 +17,51 @@ body {
 }
 
 .container {
-  /* margin-top: 40px; */
+  max-width: 1400px;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .search-bar {
-  width: 30%;
+  width: 100%;
+  max-width: 400px;
   margin: 20px auto;
+  flex-shrink: 0;
 }
 
 #searchBar {
   width: 100%;
-  padding: 8px 12px;
+  padding: 10px 14px;
   border: none;
   border-radius: 4px;
   outline: none;
   background-color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
 }
 
 ul {
   list-style: none;
-  display: grid;
-  grid-auto-flow: column;
-  grid-template-rows: repeat(16, auto);
-  grid-auto-columns: 300px;
-  column-gap: 50px;
+  display: flex;
+  flex-flow: column wrap;
+  align-content: center;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  column-gap: 48px;
+  overflow-x: auto;
+  overflow-y: hidden;
   padding: 0;
-  justify-content: center;
+  margin: 0;
+  --col-width: 200px;
 }
 
 .container li {
+  width: var(--col-width);
+  flex-shrink: 0;
   font-size: 16px;
   padding: 0 0 14px 0;
   font-weight: 500;
@@ -53,6 +75,14 @@ li a {
   gap: 12px;
 }
 
+li a span {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 a:hover {
   color: rgb(30, 0, 255);
 }
@@ -61,4 +91,24 @@ li a img {
   width: 20px;
   height: 20px;
   border-radius: 2px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 12px;
+  }
+
+  .search-bar {
+    max-width: 100%;
+  }
+
+  ul {
+    column-gap: 28px;
+    --col-width: 140px;
+  }
+
+  .container li {
+    font-size: 14px;
+  }
 }

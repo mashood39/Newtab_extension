@@ -35,13 +35,13 @@ function displayBookmarks(bookmarksToDisplay) {
     img.srcset = `chrome-extension://${chrome.runtime.id}/_favicon/?pageUrl=${encodeURIComponent(node.url)}&size=32 2x`
     img.alt = " "
 
-    let text = node.title || node.url;
-    if (text.length > 25) {
-      text = text.substring(0, 25) + "...";
-    }
+    const text = node.title || node.url;
+    const label = document.createElement('span');
+    label.textContent = text;
+    label.title = text;
 
     a.appendChild(img);
-    a.appendChild(document.createTextNode(text));
+    a.appendChild(label);
     li.appendChild(a);
     list.appendChild(li);
   }
