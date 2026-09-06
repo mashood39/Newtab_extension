@@ -16,6 +16,23 @@ body {
   background-attachment: fixed;
 }
 
+.show-all-toggle {
+  position: fixed;
+  top: 16px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: white;
+  font-size: 14px;
+  user-select: none;
+  z-index: 10;
+}
+
+.show-all-toggle input {
+  cursor: pointer;
+}
+
 .container {
   max-width: 1400px;
   height: 100vh;

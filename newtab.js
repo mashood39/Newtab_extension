@@ -1,4 +1,5 @@
 let allBookmarks = [];
+const HIDDEN_FOLDER_NAME = "personal";
 
 // Load bookmarks
 function loadBookmarks() {
@@ -7,18 +8,19 @@ function loadBookmarks() {
   allBookmarks = [];
 
   chrome.bookmarks.getTree((nodes) => {
-    function traverse(bookmarkNodes) {
+    function traverse(bookmarkNodes, insideHiddenFolder) {
       for (let node of bookmarkNodes) {
+        const hidden = insideHiddenFolder || (!!node.title && node.title.trim().toLowerCase() === HIDDEN_FOLDER_NAME);
         if (node.url) {
-          allBookmarks.push(node);
+          allBookmarks.push({ ...node, hidden });
         }
         if (node.children) {
-          traverse(node.children)
+          traverse(node.children, hidden)
         }
       }
     }
-    traverse(nodes)
-    displayBookmarks(allBookmarks);
+    traverse(nodes, false)
+    applyFilters();
   })
 }
 
@@ -47,10 +49,12 @@ function displayBookmarks(bookmarksToDisplay) {
   }
 }
 
-// to filter bookmarks based on search input
-function filterBookmarks() {
+// to filter bookmarks based on search input and the "show all" toggle
+function applyFilters() {
   const searchInput = document.getElementById('searchBar').value.toLowerCase();
+  const showAll = document.getElementById('showAllToggle').checked;
   const filtered = allBookmarks.filter(bookmark => {
+    if (!showAll && bookmark.hidden) return false;
     const title = (bookmark.title || "").toLowerCase();
     const url = (bookmark.url || "").toLowerCase();
     return title.includes(searchInput) || url.includes(searchInput)
@@ -60,7 +64,9 @@ function filterBookmarks() {
 
 document.addEventListener('DOMContentLoaded', () => {
   const searchBar = document.getElementById('searchBar');
-  searchBar.addEventListener('input', filterBookmarks);
+  const showAllToggle = document.getElementById('showAllToggle');
+  searchBar.addEventListener('input', applyFilters);
+  showAllToggle.addEventListener('change', applyFilters);
   loadBookmarks();
 
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
